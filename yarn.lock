@@ -469,20 +469,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sa-net/utils@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@sa-net/utils@workspace:."
-  dependencies:
-    "@types/node": ^18.13.0
-    "@vitest/coverage-c8": ^0.29.8
-    "@vitest/coverage-istanbul": ^0.29.8
-    npm-run-all: ^4.1.5
-    typescript: ^4.9.3
-    vite: ^4.2.0
-    vitest: ^0.29.8
-  languageName: unknown
-  linkType: soft
-
 "@npmcli/fs@npm:^2.1.0":
   version: 2.1.2
   resolution: "@npmcli/fs@npm:2.1.2"
@@ -502,6 +488,20 @@ __metadata:
   checksum: 52dc02259d98da517fae4cb3a0a3850227bdae4939dda1980b788a7670636ca2b4a01b58df03dd5f65c1e3cb70c50fa8ce5762b582b3f499ec30ee5ce1fd9380
   languageName: node
   linkType: hard
+
+"@sa-net/utils@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@sa-net/utils@workspace:."
+  dependencies:
+    "@types/node": ^18.13.0
+    "@vitest/coverage-c8": ^0.29.8
+    "@vitest/coverage-istanbul": ^0.29.8
+    npm-run-all: ^4.1.5
+    typescript: ^4.9.3
+    vite: ^4.2.0
+    vitest: ^0.29.8
+  languageName: unknown
+  linkType: soft
 
 "@tootallnate/once@npm:2":
   version: 2.0.0
