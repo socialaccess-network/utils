@@ -3,15 +3,15 @@
 	"version": "0.0.14",
 	"license": "Unlicense",
 	"author": {
-		"name": "Micheal Pearce",
-		"email": "michealpearce@outlook.com"
+		"name": "SocialAccess Network",
+		"email": "business@socialaccess.network"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/MichealPearce/utils.git"
+		"url": "https://github.com/socialaccess-network/utils.git"
 	},
 	"bugs": {
-		"url": "https://github.com/MichealPearce/utils/issues"
+		"url": "https://github.com/socialaccess-network/utils/issues"
 	},
 	"main": "dist/index.mjs",
 	"types": "src/index.ts",
