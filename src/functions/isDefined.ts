@@ -1,5 +1,3 @@
-import { Is, Not } from './is'
-
 /**
  * Checks if thing is defined
  *
@@ -16,7 +14,9 @@ import { Is, Not } from './is'
  * 	// thing is type undefined
  * }
  */
-export function isDefined<T>(thing: T): thing is Not<T, undefined> {
+export function isDefined<T>(
+	thing: T,
+): thing is T extends undefined ? never : T {
 	return typeof thing !== 'undefined'
 }
 
@@ -36,6 +36,6 @@ export function isDefined<T>(thing: T): thing is Not<T, undefined> {
  * 	// thing is type string
  * }
  */
-export function notDefined<T>(thing: T): thing is Is<T, undefined> {
+export function notDefined(thing: unknown): thing is undefined {
 	return typeof thing === 'undefined'
 }

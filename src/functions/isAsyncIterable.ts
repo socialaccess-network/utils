@@ -1,5 +1,4 @@
-import { inObject } from './inObject'
-import { Is, Not, not } from './is'
+import { inRecord } from './inRecord'
 import { isFunction } from './isFunction'
 
 /**
@@ -8,23 +7,11 @@ import { isFunction } from './isFunction'
  * @param thing The thing to check.
  * @returns thing is AsyncIterable<any>
  */
-export function isAsyncIterable<T>(
-	thing: T,
-): thing is Is<T, AsyncIterable<any>> {
+export function isAsyncIterable<T extends AsyncIterable<any>>(
+	thing: unknown,
+): thing is T {
 	return (
-		inObject(thing, [Symbol.asyncIterator]) &&
+		inRecord(thing, [Symbol.asyncIterator]) &&
 		isFunction(thing[Symbol.asyncIterator])
 	)
-}
-
-/**
- * Check if a thing is not an async iterable.
- *
- * @param thing The thing to check.
- * @returns thing is not AsyncIterable<any>
- */
-export function notAsyncIterable<T>(
-	thing: T,
-): thing is Not<T, AsyncIterable<any>> {
-	return not(isAsyncIterable(thing))
 }

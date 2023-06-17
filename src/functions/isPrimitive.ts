@@ -1,4 +1,3 @@
-import { Is, Not, not } from './is'
 import { isBigInt } from './isBigInt'
 import { isBoolean } from './isBoolean'
 import { notDefined } from './isDefined'
@@ -16,7 +15,7 @@ export type PrimitiveValue =
 	| undefined
 	| null
 
-export function isPrimitive<T>(thing: T): thing is Is<T, PrimitiveValue> {
+export function isPrimitive(thing: unknown): thing is PrimitiveValue {
 	return (
 		isString(thing) ||
 		isNumber(thing) ||
@@ -26,8 +25,4 @@ export function isPrimitive<T>(thing: T): thing is Is<T, PrimitiveValue> {
 		isNull(thing) ||
 		notDefined(thing)
 	)
-}
-
-export function notPrimitive<T>(thing: T): thing is Not<T, PrimitiveValue> {
-	return not(isPrimitive(thing))
 }

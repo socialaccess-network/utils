@@ -1,10 +1,5 @@
-import { Is, Not, not } from './is'
 import { isRecord } from './isRecord'
 
-export function isMap<T>(thing: T): thing is Is<T, Map<any, any>> {
+export function isMap<T extends Map<any, any>>(thing: unknown): thing is T {
 	return isRecord(thing) && thing instanceof Map
-}
-
-export function notMap<T>(thing: T): thing is Not<T, Map<any, any>> {
-	return not(isMap(thing))
 }

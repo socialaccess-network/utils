@@ -1,6 +1,5 @@
-import { Is, Not, not } from './is'
 import { isFunction } from './isFunction'
-import { notNull } from './isNull'
+import { isNull } from './isNull'
 
 /**
  * Check if a thing is iterable.
@@ -8,21 +7,13 @@ import { notNull } from './isNull'
  * @param thing The thing to check.
  * @returns thing is Iterable<any>
  */
-export function isIterable<T>(thing: T): thing is Is<T, Iterable<any>> {
+export function isIterable<T extends Iterable<any>>(
+	thing: unknown,
+): thing is T {
 	return (
 		typeof thing === 'object' &&
-		notNull(thing) &&
+		!isNull(thing) &&
 		Symbol.iterator in thing &&
 		isFunction(thing[Symbol.iterator])
 	)
-}
-
-/**
- * Check if a thing is not iterable.
- *
- * @param thing The thing to check.
- * @returns thing is Not<T, Iterable<any>>
- */
-export function notIterable<T>(thing: T): thing is Not<T, Iterable<any>> {
-	return not(isIterable(thing))
 }

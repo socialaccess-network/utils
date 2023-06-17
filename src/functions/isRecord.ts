@@ -1,6 +1,5 @@
-import { Is, not, Not } from './is'
-import { notArray } from './isArray'
-import { notNull } from './isNull'
+import { isArray } from './isArray'
+import { isNull } from './isNull'
 
 /**
  * Check if a value is a record.
@@ -17,10 +16,8 @@ import { notNull } from './isNull'
  * isRecord('') // false
  *
  */
-export function isRecord<T>(thing: T): thing is Is<T, Record<any, any>> {
-	return typeof thing === 'object' && notNull(thing) && notArray(thing)
-}
-
-export function notRecord<T>(thing: T): thing is Not<T, Record<any, any>> {
-	return not(isRecord(thing))
+export function isRecord<T extends Record<any, any>>(
+	thing: unknown,
+): thing is T {
+	return typeof thing === 'object' && !isNull(thing) && !isArray(thing)
 }

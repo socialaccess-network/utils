@@ -1,5 +1,3 @@
-import { Is, Not, not } from './is'
-
 /**
  * checks if thing is an array
  *
@@ -16,46 +14,6 @@ import { Is, Not, not } from './is'
  * }
  *
  */
-export function isArray<T>(thing: T): thing is Is<T, any[]> {
+export function isArray<T extends any[]>(thing: unknown): thing is T {
 	return Array.isArray(thing)
-}
-
-/**
- * checks if thing is an empty array
- *
- * @param thing
- * @returns thing is []
- */
-export function isEmptyArray<T>(thing: T): thing is Is<T, []> {
-	return isArray(thing) && not(thing.length)
-}
-
-/**
- * checks if thing is not an array
- *
- * @param thing
- * @returns thing is not any[]
- *
- * @example
- * const thing = [1, 2, 3] as number[] | string
- *
- * if (notArray(thing)) {
- * 	// thing is string
- * } else {
- * 	// thing is number[]
- * }
- */
-export function notArray<T>(thing: T): thing is Not<T, any[]> {
-	return not(isArray(thing))
-}
-
-/**
- * checks if thing is not an empty array
- *
- * @param thing
- * @returns thing is not []
- *
- */
-export function notEmptyArray<T>(thing: T): thing is Not<T, []> {
-	return not(isEmptyArray(thing))
 }

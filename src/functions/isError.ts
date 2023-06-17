@@ -1,5 +1,4 @@
-import { Is, Not, not } from './is'
-import { isObject } from './isObject'
+import { isRecord } from './isRecord'
 
 /**
  * Checks if thing is instance of Error.
@@ -16,25 +15,6 @@ import { isObject } from './isObject'
  * 	// thing is type null
  * }
  */
-export function isError<T>(thing: T): thing is Is<T, Error> {
-	return isObject(thing) && thing instanceof Error
-}
-
-/**
- * Checks if thing is not instance of Error.
- *
- * @param thing The thing to check.
- * @returns thing is not Error
- *
- * @example
- * const thing = new Error('Hello, there!') as Error | null
- *
- * if (notError(thing)) {
- * 	// thing is type null
- * } else {
- * 	// thing is type Error
- * }
- */
-export function notError<T>(thing: T): thing is Not<T, Error> {
-	return not(isError(thing))
+export function isError<T extends Error>(thing: unknown): thing is T {
+	return isRecord(thing) && thing instanceof Error
 }
