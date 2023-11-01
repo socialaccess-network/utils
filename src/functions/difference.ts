@@ -1,12 +1,15 @@
 import { isArray } from './isArray'
+import { isIterable } from './isIterable'
 
 /**
- * Returns the difference between two arrays.
- * The difference is the items that are in the first array but not the second.
+ * Returns the difference between two or more iterables.
+ * The difference is the items that are in the first iterable but not the second.
  *
- * @param target The array to compare.
- * @param sources The arrays to compare against.
- * @returns The difference between the arrays.
+ * Does not work with Maps.
+ *
+ * @param target The iterable to compare.
+ * @param sources The iterables to compare against.
+ * @returns The difference between the iterables.
  *
  * @example
  * const arr1 = [1, 2, 3]
@@ -17,20 +20,45 @@ import { isArray } from './isArray'
  *
  * console.log(diff) // [1]
  */
-export function difference<T extends Iterable<any>>(
-	target: T,
-	...sources: T[]
+export function difference<T>(
+	target: Iterable<T>,
+	...sources: Iterable<T>[]
 ): T[] {
-	const diff: T[] = []
+	const result: T[] = []
+	const sourcesLength = sources.length
 
 	for (const item of target) {
-		const seen = sources.some(source =>
-			isArray(source)
-				? source.includes(item)
-				: Array.from(source).includes(item),
-		)
-		if (!seen) diff.push(item)
+		let found = false
+
+		for (let i = 0; i < sourcesLength; i++) {
+			const source = sources[i]
+
+			if (isArray(source)) {
+				if (source.includes(item)) {
+					found = true
+					break
+				}
+			} else if (source instanceof Set) {
+				if (source.has(item)) {
+					found = true
+					break
+				}
+			} else if (isIterable(source)) {
+				for (const value of source) {
+					if (value === item) {
+						found = true
+						break
+					}
+				}
+			} else {
+				throw new TypeError('Expected an array, Set, or iterable.')
+			}
+		}
+
+		if (!found) {
+			result.push(item)
+		}
 	}
 
-	return diff
+	return result
 }
