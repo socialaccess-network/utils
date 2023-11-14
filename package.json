@@ -1,6 +1,6 @@
 {
 	"name": "@sa-net/utils",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"license": "Unlicense",
 	"author": {
 		"name": "SocialAccess Network",
@@ -13,14 +13,14 @@
 	"bugs": {
 		"url": "https://github.com/socialaccess-network/utils/issues"
 	},
-	"main": "dist/index.mjs",
-	"types": "src/index.ts",
+	"main": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
 			"require": "./dist/index.cjs",
 			"import": "./dist/index.mjs",
-			"types": "./src/index.ts"
+			"types": "./dist/index.d.ts"
 		}
 	},
 	"files": [
@@ -35,7 +35,8 @@
 		"coverage": "vitest --coverage",
 		"build:test": "vitest run",
 		"build:vite": "vite build",
-		"build": "run-s build:test build:vite",
+		"build:dts": "tsc",
+		"build": "run-s build:test build:vite build:dts",
 		"publish": "yarn build && yarn npm publish --access public"
 	},
 	"devDependencies": {
